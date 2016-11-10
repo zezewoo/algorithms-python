@@ -1,58 +1,65 @@
-def walk(G, s, S=set()):
-	P, Q = dict(), set()
-	P[s] = None
-	Q.add(s)
-	while Q:
-		u = Q.pop()
-		for v in G[u].difference(P, S):
-			Q.add(v)
-			P[v] = u
-	return P
+#! /usr/bin/python
 
 
-def some_graph():
-	a, b, c, d, e, f, g, h = range(8)
-	N = [
-		[b, c, d, e, f],
-		[c, e],
-		[d],
-		[e],
-		[f],
-		[c, g, h],
-		[f, h],
-		[f, g]
-	]
-	return N
+class Graph:
+	"""docstring for Graph"""
 
-G = some_graph()
-for i in range(len(G)):
-	G[i] = set(G[i])
-print list(walk(G, 0))
+	def __init__(self, directed = False):
+		self._outgoing = {}
+		self._incoming = {} if directed else _outgoing
 
-def tr(G):
-	GT = {}
-	for u in G: GT[u] = set()
-	for u in G:
-		for v in G[u]:
-			GT[v].add(u)
-	return GT
+	def is_directed(self):	
+		return self._incoming is not self._outgoing
 
-def scc(G):
-	GT = tr(G)
-	sccs, seen = [], set()
-	for u in dfs_topsort(G):
-		if u in seen: continue
-		C = walk(GT, u, seen)
-		seen.update(C)
-		sccs.append(C)
-	return sccs
+	def vertex_count(self):
+		return len(self._outgoing)
 
-from string import ascii_lowercase
-def parse_graph(s):
-	G = {}
-	for u, line in zip(ascii_lowercase, s.split("/")):
-		G[u] = set(line)
-	return G
+	def vertices(self):
+		return self._outgoing.keys()
 
-G = parse_graph('bc/die/d/ah/f/g/eh/i/h')
-print list(map(list, scc(G)))
+	def edge_count(self):
+		total = sum(len(self._outgoing[v]) for v in self._outgoing)
+		return total if self.is_directed() else total
+
+	def edges(self):
+		result = set()
+		for secondary_map in self._outgoing.values():
+			result.update(secondary_map.values())
+		return result
+
+	def get_edge(u, v):
+		return self._outgoing[u].get(v)
+
+	def degree(self, v, outgoing=True):
+		adj = self._outgoing if outgoing else self._incoming
+		return len(adj[v]
+
+	def incident_edges(self, v, outgoing=True):
+		adj = self._outgoing if outgoing else self._incoming
+		for edge in adj[v].values():
+			yield edge
+
+	def insert_vertex(self, x=None):
+		v = self.Vertex(x)
+		self._outgoing[v] = {}
+		if self.is_directed:
+			self._incoming[v] = {}
+		return v
+
+	def insert_edge(self, u, v, x=None):
+		e = self.Edge(u, v, x)
+		self._outgoing[u][v] = e
+		self._incoming[v][u] = e
+
+	def DFS(g, u, discovered):
+		for e in g.incident_edges(u):
+			v = e.opposite(u)
+			if v not in discovered:
+				discovered[u] = e
+				DFS(g, v discovered)
+
+	
+
+
+
+
