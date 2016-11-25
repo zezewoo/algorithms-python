@@ -4,7 +4,7 @@ class LinkedQueue:
 
 	class _Node:
 		"""docstring for Node"""
-		__slot__ = '_element', '_next'
+		__slots__ = '_element', '_next'
 
 		def __init__(self, element, next):
 			self._element = element

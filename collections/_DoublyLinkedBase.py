@@ -6,7 +6,7 @@ class _DoublyLinkedBase:
 	class _Node:
 		"""docstring for _Node"""
 
-		slots = '_element', '_prev', '_next'
+		__slots__ = '_element', '_prev', '_next'
 
 		def __init__(self, element, prev, next):
 			self._element = element
@@ -44,14 +44,6 @@ class _DoublyLinkedBase:
 		element = node._element
 		node._prev = node._next = node._element = None
 		return element
-	
-
-
-
-
-
-
-
 
 
 

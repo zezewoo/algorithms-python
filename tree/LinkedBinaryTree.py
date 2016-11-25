@@ -7,7 +7,7 @@ class LinkedBinaryTree(BinaryTree):
 	class _Node:
 		"""docstring for _Node"""
 
-		__slot__ = '_element', 'parent', 'left', 'right'
+		__slots__ = '_element', 'parent', 'left', 'right'
 
 		def __init__(self, element, parent, left, right):
 			self._element = element
@@ -131,6 +131,7 @@ class LinkedBinaryTree(BinaryTree):
       	self._size += len(t1) + len(t2)
       	#...
 
+
     def preorder(self):
 		if not self.is_empty():
 			for p in self._subtree_preorder(self.root)
@@ -154,6 +155,7 @@ class LinkedBinaryTree(BinaryTree):
 			for other in self._subtree_postorder(c):
 				yield other
 		yield p
+
 
 
 	def inorder(self):
