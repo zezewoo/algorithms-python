@@ -1,8 +1,8 @@
 #! /usr/bin/python
 
 
-class LinkedList:
-	"""docstring for LinkedList"""
+class LinkedStack:
+	"""docstring for LinkedStack"""
 
 	class _Node:
 		"""docstring for Node"""
